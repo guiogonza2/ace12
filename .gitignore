@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# API Keys
+.env
+*.env
+
+# Editor
+.vscode/
+.idea/
+
+# Archivos generados
+*.log
+*.tmp
