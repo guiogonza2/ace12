@@ -1,86 +1,84 @@
 # Sistema de Integración EventStoreDB y Python
 
-![Status](https://img.shields.io/badge/status-active-success.svg)
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
-![EventStoreDB](https://img.shields.io/badge/EventStoreDB-latest-orange.svg)
+![Python](https://img.shields.io/badge/python-v3.8%2B-blue.svg)
+![EventStoreDB](https://img.shields.io/badge/EventStoreDB-21.6.0-orange.svg)
 
 ## Descripción del sistema
 
-Este sistema combina la potencia de EventStoreDB con scripts en Python para crear una solución robusta de manejo de eventos y procesamiento de datos en tiempo real. Se utiliza para gestionar consultas y verificaciones en línea a través de servicios web, optimizando las interacciones entre clientes y verificaciones de procesos online.
+Este sistema está diseñado para integrar funcionalidades de procesamiento de eventos con EventStoreDB (.esql) y scripts de automatización y conexión con APIs externas utilizando Python (.py). Se utiliza principalmente para manejar y verificar datos de clientes y procesos de verificación en línea de manera eficiente y automatizada.
 
-### Scripts .esql
+## Scripts .esql
 
-#### ConsultaCliente_Compute.esql
-- **Propósito:** Este script gestiona las consultas de clientes, extrayendo y procesando la información desde solicitudes entrantes.
-- **Flujo de eventos:** Recibe datos del cliente, procesa la información y envía respuestas adecuadas basadas en la consulta realizada.
+### ConsultaCliente_Compute.esql
+- **Propósito:** Este script maneja la consulta de datos de clientes. Extrae valores específicos de las solicitudes entrantes para procesar y validar la información del cliente.
+- **Flujo de eventos:** El script recibe un mensaje SOAP, extrae los datos necesarios y los procesa para verificar la identidad del cliente y otros detalles relevantes.
 
-#### srvonlineverifyprocess_Compute.esql
-- **Propósito:** Administra la verificación de servicios en línea, asegurando que las transacciones y consultas se realicen de manera segura y eficiente.
-- **Flujo de eventos:** Captura datos de la solicitud, verifica la información y retorna el estado de la verificación.
+### srvonlineverifyprocess_Compute.esql
+- **Propósito:** Automatiza el proceso de verificación en línea de los clientes.
+- **Flujo de eventos:** Recibe datos de entrada a través de un servicio web, procesa la información utilizando múltiples namespaces y realiza verificaciones contra bases de datos internas o externas.
 
-### Scripts Python
+## Scripts Python
 
-#### testapi.py
-- **Funcionalidad:** Prueba las integraciones API y maneja la configuración de claves de API para desarrollo y pruebas.
-- **Dependencias:** `openai`
+### testapi.py
+- **Funcionalidad:** Este script se utiliza para pruebas de integración con APIs externas, utilizando la clave API de OpenAI.
+- **Dependencias:** `openai`, `os`
 
-#### update_readme.py
-- **Funcionalidad:** Automatiza la actualización del archivo README.md del repositorio, utilizando la clave API de OpenAI para procesar y actualizar información.
-- **Dependencias:** `openai`, `os`, `sys`, `pathlib`
+### update_readme.py
+- **Funcionalidad:** Automatiza la actualización del archivo README.md del proyecto basándose en cambios detectados en el repositorio.
+- **Dependencias:** `os`, `sys`, `pathlib`, `openai`
 
 ## Diagrama de interacción entre componentes
 
 ```mermaid
 graph LR
-    Cliente[Cliente] -- Solicita información --> ConsultaCliente_Compute
-    ConsultaCliente_Compute -- Procesa solicitud --> EventStoreDB
-    EventStoreDB -- Almacena evento --> srvonlineverifyprocess_Compute
-    srvonlineverifyprocess_Compute -- Verifica información --> Cliente
-    testapi.py -- Utiliza --> OpenAI
-    update_readme.py -- Actualiza --> README.md
+    A[ConsultaCliente_Compute.esql] --> B((API SOAP))
+    B --> C{Procesamiento Python}
+    D[srvonlineverifyprocess_Compute.esql] --> E((Servicio Web))
+    E --> C
+    C --> F[Base de Datos]
+    F --> G[Resultados]
+    G --> H[Cliente]
 ```
 
 ## Requisitos técnicos
 
-- Python 3.8 o superior.
-- Acceso a EventStoreDB.
-- Dependencias Python instaladas (`openai`).
+- Python 3.8 o superior
+- EventStoreDB 21.6.0
+- Bibliotecas Python: `openai`, `os`, `sys`, `pathlib`
+- Acceso a servicios web y APIs externas
 
 ## Guía de instalación/configuración
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/ejemplo/sistema-integracion.git
-   cd sistema-integracion
-   ```
+1. **Instalar Python:**
+   - Descargar e instalar Python desde [python.org](https://www.python.org/downloads/).
 
-2. **Instalar dependencias Python:**
+2. **Configurar EventStoreDB:**
+   - Descargar EventStoreDB desde [Event Store](https://eventstore.com/downloads/).
+   - Seguir las instrucciones de instalación específicas para su sistema operativo.
+
+3. **Instalar dependencias de Python:**
    ```bash
    pip install openai
    ```
 
-3. **Configurar variables de entorno:**
-   - Establecer `OPENAI_API_KEY` con su clave de API de OpenAI.
+4. **Configurar variables de entorno:**
+   - Establecer `OPENAI_API_KEY` con su clave de API en el entorno de ejecución.
 
-4. **Configurar EventStoreDB:**
-   - Asegúrese de que EventStoreDB esté instalado y configurado correctamente en su entorno.
+5. **Clonar el repositorio y configurar scripts:**
+   - Ajustar rutas y parámetros según la configuración del entorno de producción o desarrollo.
 
 ## Ejemplos de uso
 
-### Uso de .esql
-- **ConsultaCliente_Compute.esql:**
+- **Ejecutar ConsultaCliente_Compute.esql:**
   ```sql
-  -- Ejecutar en el entorno de EventStoreDB
-  CALL ConsultaCliente_Compute.Main();
+  EXECUTE ConsultaCliente_Compute.Main();
   ```
 
-### Uso de Python
-- **testapi.py:**
-  ```python
-  # Ejecutar este script para probar la configuración de la API
+- **Ejecutar testapi.py:**
+  ```bash
   python testapi.py
   ```
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - vea el archivo LICENSE.md para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT. Para más detalles, ver el archivo `LICENSE` en el repositorio.
