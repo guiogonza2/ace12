@@ -1,84 +1,97 @@
-# Sistema de Integración EventStoreDB y Python
+# Sistema de Integración de EventStoreDB y Python
 
-![Python](https://img.shields.io/badge/python-v3.8%2B-blue.svg)
+![Status](https://img.shields.io/badge/status-active-success.svg)
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![EventStoreDB](https://img.shields.io/badge/EventStoreDB-21.6.0-orange.svg)
 
-## Descripción del sistema
+## Descripción del Sistema
 
-Este sistema está diseñado para integrar funcionalidades de procesamiento de eventos con EventStoreDB (.esql) y scripts de automatización y conexión con APIs externas utilizando Python (.py). Se utiliza principalmente para manejar y verificar datos de clientes y procesos de verificación en línea de manera eficiente y automatizada.
+Este sistema integra EventStoreDB con Python para manejar y procesar eventos de manera eficiente en aplicaciones empresariales. Utiliza scripts `.esql` para definir y manipular eventos, mientras que los scripts `.py` se encargan de interactuar con estos eventos, procesarlos y realizar operaciones de alto nivel como consultas y actualizaciones mediante APIs.
 
-## Scripts .esql
+### Scripts `.esql`
 
-### ConsultaCliente_Compute.esql
-- **Propósito:** Este script maneja la consulta de datos de clientes. Extrae valores específicos de las solicitudes entrantes para procesar y validar la información del cliente.
-- **Flujo de eventos:** El script recibe un mensaje SOAP, extrae los datos necesarios y los procesa para verificar la identidad del cliente y otros detalles relevantes.
+#### ConsultaCliente_Compute.esql
+**Propósito:** Este módulo se encarga de procesar las solicitudes de consulta de clientes. Extrae y valida los datos del cliente desde el request antes de proceder con la consulta en la base de datos.
 
-### srvonlineverifyprocess_Compute.esql
-- **Propósito:** Automatiza el proceso de verificación en línea de los clientes.
-- **Flujo de eventos:** Recibe datos de entrada a través de un servicio web, procesa la información utilizando múltiples namespaces y realiza verificaciones contra bases de datos internas o externas.
+**Flujo de eventos:**
+1. Recepción del request.
+2. Extracción y validación de los datos del cliente.
+3. Consulta a la base de datos.
+4. Envío de la respuesta.
 
-## Scripts Python
+#### srvonlineverifyprocess_Compute.esql
+**Propósito:** Este módulo verifica la validez de las transacciones en línea mediante la comunicación con servicios externos.
 
-### testapi.py
-- **Funcionalidad:** Este script se utiliza para pruebas de integración con APIs externas, utilizando la clave API de OpenAI.
-- **Dependencias:** `openai`, `os`
+**Flujo de eventos:**
+1. Recepción de datos de la transacción.
+2. Validación de la información recibida.
+3. Comunicación con el servicio externo de verificación.
+4. Recepción y procesamiento de la respuesta del servicio externo.
 
-### update_readme.py
-- **Funcionalidad:** Automatiza la actualización del archivo README.md del proyecto basándose en cambios detectados en el repositorio.
-- **Dependencias:** `os`, `sys`, `pathlib`, `openai`
+### Scripts Python
 
-## Diagrama de interacción entre componentes
+#### testapi.py
+**Funcionalidad:** Este script prueba la conectividad y la funcionalidad de la API de OpenAI, asegurando que las credenciales y la red están configuradas correctamente.
 
-```mermaid
-graph LR
-    A[ConsultaCliente_Compute.esql] --> B((API SOAP))
-    B --> C{Procesamiento Python}
-    D[srvonlineverifyprocess_Compute.esql] --> E((Servicio Web))
-    E --> C
-    C --> F[Base de Datos]
-    F --> G[Resultados]
-    G --> H[Cliente]
+**Dependencias:**
+- `openai`
+- `dotenv`
+
+#### update_readme.py
+**Funcionalidad:** Automatiza la actualización del archivo README.md del repositorio, utilizando la API de OpenAI para generar contenido.
+
+**Dependencias:**
+- `openai`
+- `dotenv`
+- `pathlib`
+
+## Diagrama de Interacción entre Componentes
+```
++----------------+     +------------------+     +------------------+
+|                |     |                  |     |                  |
+|  .esql Scripts +---->+  EventStoreDB    +---->+  Python Scripts  |
+|                |     |                  |     |                  |
++----------------+     +------------------+     +------------------+
 ```
 
-## Requisitos técnicos
+## Requisitos Técnicos
 
-- Python 3.8 o superior
-- EventStoreDB 21.6.0
-- Bibliotecas Python: `openai`, `os`, `sys`, `pathlib`
-- Acceso a servicios web y APIs externas
+- Python 3.8 o superior.
+- EventStoreDB 21.6.0.
+- Bibliotecas Python: `openai`, `dotenv`, `pathlib`.
 
-## Guía de instalación/configuración
+## Guía de Instalación/Configuración
 
 1. **Instalar Python:**
-   - Descargar e instalar Python desde [python.org](https://www.python.org/downloads/).
+   - Descargar desde [python.org](https://www.python.org/downloads/) e instalar.
 
-2. **Configurar EventStoreDB:**
-   - Descargar EventStoreDB desde [Event Store](https://eventstore.com/downloads/).
-   - Seguir las instrucciones de instalación específicas para su sistema operativo.
+2. **Instalar EventStoreDB:**
+   - Seguir las instrucciones en [Event Store](https://eventstore.com/docs/).
 
-3. **Instalar dependencias de Python:**
+3. **Configurar variables de entorno:**
+   - Crear un archivo `.env` en la raíz del proyecto y añadir la clave `OPENAI_API_KEY`.
+
+4. **Instalar dependencias de Python:**
    ```bash
-   pip install openai
+   pip install openai python-dotenv
    ```
 
-4. **Configurar variables de entorno:**
-   - Establecer `OPENAI_API_KEY` con su clave de API en el entorno de ejecución.
+## Ejemplos de Uso
 
-5. **Clonar el repositorio y configurar scripts:**
-   - Ajustar rutas y parámetros según la configuración del entorno de producción o desarrollo.
+### Uso de `.esql`
+```sql
+-- ConsultaCliente_Compute.esql
+DECLARE idClienteInput INTEGER SET idClienteInput = 123;
+CALL ConsultaCliente_Compute.Main();
+```
 
-## Ejemplos de uso
-
-- **Ejecutar ConsultaCliente_Compute.esql:**
-  ```sql
-  EXECUTE ConsultaCliente_Compute.Main();
-  ```
-
-- **Ejecutar testapi.py:**
-  ```bash
-  python testapi.py
-  ```
+### Uso de Python
+```python
+# testapi.py
+from testapi import test_openai_api
+test_openai_api()
+```
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Para más detalles, ver el archivo `LICENSE` en el repositorio.
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE.md para más detalles.
