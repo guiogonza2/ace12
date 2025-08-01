@@ -1,81 +1,54 @@
-# Sistema de Integración de EventStoreDB y Python...
+## Análisis de archivos .esql
 
-![Status](https://img.shields.io/badge/status-active-success.svg)
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
-![EventStoreDB](https://img.shields.io/badge/EventStoreDB-latest-orange.svg)
+### Análisis General
+Los archivos `.esql` son utilizados en IBM App Connect Enterprise (antes conocido como IBM Integration Bus) para definir módulos de computación que transforman, enriquecen, filtran y dirigen los mensajes que fluyen a través de un bus de integración. Los módulos de computación están escritos en ESQL, un lenguaje específico del dominio diseñado para trabajar con mensajes y datos en un entorno de middleware.
 
-## Descripción del Sistema
-Este sistema integra EventStoreDB con Python para manejar y procesar eventos de datos en tiempo real. Utiliza scripts `.esql` para la manipulación y consulta de eventos, mientras que los scripts `.py` se encargan de interactuar con APIs externas y automatizar tareas relacionadas con la gestión de eventos.
+### Detalles Específicos
 
-### Scripts `.esql`
-Los scripts `.esql` se utilizan para definir módulos de computación que procesan eventos de datos. Estos scripts extraen y transforman datos de eventos para su posterior análisis y almacenamiento.
+#### 1. ConsultaCliente_Compute.esql
+- **Ubicación:** `ACE12-APP-TESTING\src\ConsultaClienteWS\ConsultaCliente_Compute.esql`
+- **Propósito:** Este módulo parece estar diseñado para manejar operaciones relacionadas con la consulta de clientes.
+- **Funcionalidad clave:**
+  - **Declaración de Namespace:** Utiliza un namespace específico (`http://bcp.com.pe/ClienteWSDL/`) que probablemente esté relacionado con servicios web para clientes.
+  - **Variables Importantes:**
+    - `idClienteInput`: Posiblemente el identificador del cliente que se consulta.
+    - `usuarioInput`: El usuario que realiza la consulta.
+    - `nombreCliente`: El nombre del cliente obtenido como resultado de la consulta.
+  - **Proceso:** El módulo extrae valores de una solicitud entrante, realiza operaciones (probablemente de consulta a una base de datos o a otro servicio) y manipula o envía la respuesta.
 
-#### ConsultaCliente_Compute.esql
-- **Propósito:** Procesa solicitudes de consulta de clientes.
-- **Flujo de eventos:** Extrae información del cliente desde un request, procesa la información y prepara la respuesta.
+#### 2. srvonlineverifyprocess_Compute.esql
+- **Ubicación:** `ACE12-APP-TESTING\src\SrvOnlineVerifyProcess1\srvonlineverifyprocess_Compute.esql`
+- **Propósito:** Este módulo parece estar orientado a la verificación de procesos en línea, posiblemente relacionados con autenticaciones o validaciones de transacciones.
+- **Funcionalidad clave:**
+  - **Declaración de Namespaces:**
+    - `soapNS`: Namespace asociado con el protocolo SOAP, indicando que el módulo podría estar interactuando con servicios SOAP.
+    - `v1NS` y `ifxNS`: Namespaces que sugieren una versión específica de un servicio o estándar, posiblemente relacionados con formatos de mensajes financieros o bancarios.
+  - **Proceso:** Aunque el detalle es limitado, el módulo declara namespaces críticos para el manejo de mensajes SOAP y otros formatos específicos, lo que sugiere que manipula respuestas y solicitudes en un contexto de servicios financieros.
 
-#### srvonlineverifyprocess_Compute.esql
-- **Propósito:** Verifica la información del cliente en línea.
-- **Flujo de eventos:** Recibe datos del cliente, verifica la información a través de servicios externos y registra el resultado.
+## Análisis de archivos Python
 
-### Scripts Python
-Los scripts Python interactúan con APIs y automatizan la gestión de la documentación y configuración del sistema.
+### Análisis General
+Los archivos Python aquí parecen estar orientados hacia la integración y pruebas de APIs, específicamente utilizando la API de OpenAI.
 
-#### testapi.py
-- **Funcionalidad:** Prueba la conexión y funcionalidades de la API de OpenAI.
-- **Dependencias:** `openai`, `python-dotenv`
+### Detalles Específicos
 
-#### update_readme.py
-- **Funcionalidad:** Actualiza automáticamente el archivo README del repositorio.
-- **Dependencias:** `os`, `sys`, `openai`, `pathlib`, `python-dotenv`
+#### 1. testapi.py
+- **Ubicación:** `ACE12-APP-TESTING\testapi.py`
+- **Propósito:** Este script está diseñado para probar la API de OpenAI, probablemente para validar la funcionalidad o el rendimiento.
+- **Funcionalidad clave:**
+  - **Importaciones:** Utiliza módulos como `os`, `openai`, y `dotenv` para cargar configuraciones y interactuar con la API de OpenAI.
+  - **Variables Importantes:**
+    - `OPENAI_API_KEY`: Clave de API necesaria para autenticar las solicitudes a OpenAI.
+  - **Proceso:** El script carga la clave de API desde variables de entorno y realiza llamadas a la API de OpenAI para obtener respuestas de completaciones de chat.
 
-## Diagrama de Interacción entre Componentes
-```plaintext
-+----------------+       +------------------+       +------------------+
-|                |       |                  |       |                  |
-|  EventStoreDB  +------>+  Scripts .esql   +------>+  Scripts Python  |
-|                |       |                  |       |                  |
-+----------------+       +------------------+       +------------------+
-                          |                  |
-                          +------> API Externa
-```
+#### 2. update_readme.py
+- **Ubicación:** `ACE12-APP-TESTING\.github\scripts\update_readme.py`
+- **Propósito:** Automatizar la actualización del archivo README, probablemente en un contexto de desarrollo de software donde la documentación necesita mantenerse actualizada.
+- **Funcionalidad clave:**
+  - **Importaciones:** Utiliza `os`, `sys`, `openai`, `Path`, y `dotenv`.
+  - **Variables Importantes:**
+    - `OPENAI_API_KEY`: Usada para configurar el cliente de OpenAI.
+  - **Proceso:** El script inicializa un cliente de OpenAI y maneja errores relacionados con la falta de la clave API, lo que sugiere que también podría estar interactuando con la API de OpenAI para generar o verificar contenido del README.
 
-## Requisitos Técnicos
-- Python 3.8 o superior
-- EventStoreDB última versión
-- Bibliotecas Python: `openai`, `python-dotenv`
-
-## Guía de Instalación/Configuración
-1. **Instalar Python:**
-   - Descargar e instalar Python desde [python.org](https://www.python.org/downloads/).
-
-2. **Configurar EventStoreDB:**
-   - Descargar e instalar EventStoreDB desde [Event Store](https://eventstore.com/downloads/).
-
-3. **Instalar dependencias Python:**
-   ```bash
-   pip install openai python-dotenv
-   ```
-
-4. **Configurar variables de entorno:**
-   - Crear un archivo `.env` en la raíz del proyecto y añadir la clave de API:
-     ```
-     OPENAI_API_KEY=tu_clave_api_aqui
-     ```
-
-## Ejemplos de Uso
-
-### Uso de `.esql`
-```sql
--- Ejecutar en el contexto de EventStoreDB
-EXECUTE ConsultaCliente_Compute.Main();
-```
-
-### Uso de Python
-```python
-# Ejecutar en la terminal
-python testapi.py
-```
-
-## Licencia
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+### Conclusión
+Los archivos analizados muestran una combinación de integración de middleware y servicios web en ESQL, junto con la automatización y pruebas de APIs en Python, reflejando un entorno de desarrollo activo y multifacético.
