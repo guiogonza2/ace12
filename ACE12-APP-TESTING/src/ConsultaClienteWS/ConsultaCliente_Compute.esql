@@ -63,4 +63,3 @@ CREATE COMPUTE MODULE ConsultaCliente_Compute
 		SET OutputRoot = InputRoot;
 	END;
 END MODULE;
-..
