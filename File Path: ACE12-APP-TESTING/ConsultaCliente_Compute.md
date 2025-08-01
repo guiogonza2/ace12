@@ -1,0 +1,1 @@
+📖 Crear documentación de ConsultaCliente_Compute.esql - 8/1/2025, 10:46:24 PM
