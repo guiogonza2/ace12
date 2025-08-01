@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn://grupoaval.com/xsd/ifx/v2/" xmlns:aval="urn://grupoaval.com/xsd/ifx/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:v1="urn://grupoaval.com/inquiries/v1/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+     
+      <xsd:element name="IPAddr" type="xsd:string"/>
+      <xsd:element name="Channel" type="xsd:string"/>
+      <xsd:element name="Amt" type="xsd:decimal"/>  
+      <xsd:element name="ApprovalId" type="xsd:string"/>
+      <xsd:element name="AcctId" type="xsd:string"/>
+      <xsd:element name="StatusDesc" type="xsd:string"/>
+      <xsd:element name="StartDt" type="xsd:dateTime"/>
+      <xsd:element name="BranchId" type="xsd:string"/>
+      <xsd:element name="BankId" type="xsd:string"/>
+      <xsd:element name="StatusCode" type="xsd:long"/>
+	  <xsd:element name="ServerStatusCode" type="xsd:string"/>
+	  <xsd:element name="Org" type="xsd:string"/>	  
+	  <xsd:element name="NextDay" type="xsd:string"/>
+	  <xsd:element name="Reverse" type="xsd:string"/>
+	  <xsd:element name="Language" type="xsd:string"/>
+	  <xsd:element name="SessKey" type="xsd:string"/>
+	  <xsd:element name="ClientDt" type="xsd:string"/>
+	  <xsd:element name="KeyAcctId" type="xsd:string"/>	  
+    </xsd:schema>

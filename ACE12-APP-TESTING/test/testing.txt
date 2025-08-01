@@ -1,0 +1,5 @@
+acceptance_test -> Se ejecuta en Dev
+e2e -> Se ejecuta en QA
+performance_test -> Se ejecuta en QA
+integration_test -> Se ejecuta en QA
+

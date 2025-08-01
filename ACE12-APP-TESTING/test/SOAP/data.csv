@@ -1,0 +1,2 @@
+﻿idCliente;usuario;fecha;endpoint;statusEsperado
+123456789;Juan Perez;2025-03-25;http://localhost:7800/ConsultaClienteWSBCP;0

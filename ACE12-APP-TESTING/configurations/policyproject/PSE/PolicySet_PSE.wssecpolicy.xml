@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy:Policy xmlns:_0="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:_200512="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512" xmlns:policy="http://schemas.xmlsoap.org/ws/2004/09/policy">
+  <_200512:AsymmetricBinding>
+    <policy:Policy>
+      <_200512:InitiatorToken>
+        <policy:Policy>
+          <_200512:X509Token _200512:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512/IncludeToken/AlwaysToInitiator">
+            <policy:Policy Name="InitToken">
+              <_200512:WssX509V3Token10/>
+            </policy:Policy>
+          </_200512:X509Token>
+        </policy:Policy>
+      </_200512:InitiatorToken>
+      <_200512:RecipientToken>
+        <policy:Policy>
+          <_200512:X509Token _200512:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200512/IncludeToken/AlwaysToRecipient">
+            <policy:Policy Name="RecipToken">
+              <_200512:WssX509V3Token10/>
+            </policy:Policy>
+          </_200512:X509Token>
+        </policy:Policy>
+      </_200512:RecipientToken>
+      <_200512:AlgorithmSuite>
+        <policy:Policy>
+          <_200512:Basic128Rsa15/>
+        </policy:Policy>
+      </_200512:AlgorithmSuite>
+      <_200512:IncludeTimestamp/>
+      <_200512:Layout>
+        <policy:Policy>
+          <_200512:Lax/>
+        </policy:Policy>
+      </_200512:Layout>
+    </policy:Policy>
+  </_200512:AsymmetricBinding>
+  <policy:Policy _0:Id="response:app_signparts_response">
+    <_200512:SignedParts>
+      <_200512:Body/>
+    </_200512:SignedParts>
+  </policy:Policy>
+  <policy:Policy _0:Id="request:app_signparts_request">
+    <_200512:SignedParts>
+      <_200512:Body/>
+    </_200512:SignedParts>
+  </policy:Policy>
+</policy:Policy>

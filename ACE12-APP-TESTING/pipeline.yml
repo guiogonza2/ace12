@@ -1,0 +1,87 @@
+trigger:
+  - main
+  - dev
+  - dev/*
+  - qa
+  - qa/*
+  - feature/HU_*
+  - bugfix/*
+
+  
+
+variables:
+  - group: 'ace-build'  # Grupo de variables centralizado para configuración global
+  - group: 'ACE-Deploy'  # Grupo de variables centralizado para configuración contenedores  
+  - group: 'techzone-ibm'  # Grupo de variables centralizado acceso a Openshift-Dev
+
+
+##########################################################################################
+  # - name: 'ApplicationName' 
+  # -k NombreAplicación
+  # Ajustar los nombres de las aplicaciones y  según sea necesario para el proyecto actual
+  # Puede agregar más de una aplicación utilizando el siguiente formato: -k ApplicationName1 ApplicationName2 .... ApplicationName'n'
+  # .appzip , .libzip , .shlibzip , .xsdzip , .tblxmi , .xsd , .wsdl , .dictionary , .xsl , .xslt , .xml , .jar , .inadapter , .outadapter , 
+  # .insca , .outsca , .descriptor , .idl , .mqsc , .rule , .rules , .map , .esql , .msgflow y .subflow . 
+
+  - name: 'BarName'
+    value: 'ConsultaCliente'
+  - name: 'ApplicationName' 
+    value: 'ConsultaClienteWS'
+
+##########################################################################################
+name: $(BarName)
+
+resources:
+  repositories:
+    - repository: template
+      type: git
+      name: DevOps/_git/DevOps
+      ref: 'refs/heads/main'
+
+stages:
+  - stage: dev
+    displayName: 'DESARROLLO'
+    condition: |
+      or(
+        startsWith(variables['build.sourceBranch'], 'refs/heads/feature/HU_'),
+        startsWith(variables['build.sourceBranch'], 'refs/heads/dev'),
+        startsWith(variables['System.PullRequest.TargetBranch'], 'refs/heads/dev'),
+        startsWith(variables['Build.SourceBranchName'], 'dev')
+      )      
+    jobs:
+      - template: ACE12-2025/pieline-ACE12-Template.yml@template
+      - template: ACE12-2025/pull-dashboard.yml@template
+      #- template: ACE12-2025/testing-dev-ACE12-Template.yml@template
+
+  - stage: qa
+    displayName: 'CALIDAD'
+    condition: |
+      or(
+        startsWith(variables['build.sourceBranch'], 'refs/heads/bugfix'),
+        startsWith(variables['build.sourceBranch'], 'refs/heads/qa'),
+        startsWith(variables['System.PullRequest.TargetBranch'], 'refs/heads/qa'),
+        startsWith(variables['Build.SourceBranchName'], 'qa')
+      )  
+    jobs:
+      - template: ACE12/buildQA-ACE12-Template.yml@template
+      #- template: ACE12-2025/testing-qa-ACE12-Template.yml@template
+
+  - stage: prd
+    displayName: 'PRODUCCION'
+    condition: |
+      or(
+        startsWith(variables['build.sourceBranch'], 'refs/heads/bugfix'),
+        startsWith(variables['build.sourceBranch'], 'refs/heads/main'),
+        startsWith(variables['System.PullRequest.TargetBranch'], 'refs/heads/main'),
+        startsWith(variables['Build.SourceBranchName'], 'main')
+      )  
+    dependsOn: qa    
+    jobs:
+      - template: ACE12/buildPRD-ACE12-Template.yml@template
+      #- template: ACE12-2025/testing-prd-ACE12-Template.yml@template
+
+# Metadatos
+# Realizado por: Assist Consultores
+# Área: DevOps
+# Ingeniero: Andrés Guevara
+

@@ -1,0 +1,33 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: IntegrationRuntime
+metadata:
+  name: $(OC.IRName)
+  labels:
+    backup.appconnect.ibm.com/component: integrationruntime
+  namespace: $(OC.project)
+spec:
+  license:
+    accept: true
+    license: $(IR.license)
+    use: $(IR.use)
+  template:
+    spec:
+      containers:
+        - name: runtime
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+              ephemeral-storage: 500Mi
+            requests:
+              cpu: 500m
+              memory: 500Mi
+              ephemeral-storage: 500Mi
+  logFormat: basic
+  barURL:
+$(barList)
+  configurations: [ $(configurations) ]
+  defaultNetworkPolicy:
+    enabled: true
+  replicas: 1
+  version: '12.0.11.2-r1'

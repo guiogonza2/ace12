@@ -1,0 +1,9 @@
+---
+serverConfVersion: '1'
+BrokerRegistry:
+  brokerTruststoreType: 'JKS'
+  brokerTruststoreFile: '/home/aceuser/truststores/aut-t.jks'
+  brokerTruststorePass: 'brokerTruststore::123'
+ResourceManagers:
+  JVM:
+    jvmDebugPort: 9997

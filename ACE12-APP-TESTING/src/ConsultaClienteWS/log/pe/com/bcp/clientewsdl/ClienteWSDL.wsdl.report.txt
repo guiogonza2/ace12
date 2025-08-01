@@ -1,0 +1,22 @@
+
+
+Importing file: C:\IIB10_LAB\ws-soap\WSDLClienteBCP\ClienteWSDL.wsdl
+
+The WSDL import will proceed with bindings ClienteWSDLSOAP.
+Creating wsdl schema document for file:///C:/IIB10_LAB/ws-soap/WSDLClienteBCP/ClienteWSDL.wsdl.
+Parsing wsdl binding {http://bcp.com.pe/ClienteWSDL/}ClienteWSDLSOAP.
+Parsing wsdl binding input NewOperation.
+Parsing wsdl binding output NewOperation.
+Processing doc style for operation NewOperation.
+Populating WSDL schema ClienteWSDL.xsd.
+Creating file ClienteWSDL.xsd in the workspace.
+Creating file ClienteWSDL_InlineSchema1.xsd in the workspace.
+Copying source WSDL ClienteWSDL.wsdl to ClienteWSDL.wsdl.
+
+Elapsed time processing this message definition file: 0.499 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

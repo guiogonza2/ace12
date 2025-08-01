@@ -1,0 +1,42 @@
+
+
+CREATE COMPUTE MODULE srvonlineverifyprocess_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE soapNS NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+	    DECLARE v1NS NAMESPACE 'urn://grupoaval.com/inquiries/v1/';
+	    DECLARE ifxNS NAMESPACE 'urn://grupoaval.com/xsd/ifx/';
+	    DECLARE v2NS NAMESPACE 'urn://grupoaval.com/xsd/ifx/v2/';
+
+		    -- Copiar encabezados de la solicitud a la respuesta
+		    SET OutputRoot = InputRoot;
+		    
+		    -- Modificar el cuerpo de la respuesta
+		    SET OutputRoot.XMLNSC.soapNS:Envelope.soapNS:Body.v1NS:addVerifyProcessResponse.v1NS:addVerifyProcessRs.ifxNS:Status.ifxNS:StatusCode = '0';
+		    SET OutputRoot.XMLNSC.soapNS:Envelope.soapNS:Body.v1NS:addVerifyProcessResponse.v1NS:addVerifyProcessRs.ifxNS:Status.ifxNS:Severity = 'Info';
+		    SET OutputRoot.XMLNSC.soapNS:Envelope.soapNS:Body.v1NS:addVerifyProcessResponse.v1NS:addVerifyProcessRs.ifxNS:Status.ifxNS:StatusDesc = 'Transacción Exitosa';
+		    
+		    -- Datos adicionales
+		    SET OutputRoot.XMLNSC.soapNS:Envelope.soapNS:Body.v1NS:addVerifyProcessResponse.v1NS:addVerifyProcessRs.ifxNS:RqUID = InputRoot.XMLNSC.soapNS:Envelope.soapNS:Body.v1NS:addVerifyProcessRequest.v1NS:addVerifyProcessRq.ifxNS:RqUID;
+		    
+		    -- Datos específicos de la respuesta
+		    SET OutputRoot.XMLNSC.soapNS:Envelope.soapNS:Body.v1NS:addVerifyProcessResponse.v1NS:addVerifyProcessRs.ifxNS:addVerifyProcessRsInfo.ifxNS:RefId = '933A0D8K7G002011';
+		    SET OutputRoot.XMLNSC.soapNS:Envelope.soapNS:Body.v1NS:addVerifyProcessResponse.v1NS:addVerifyProcessRs.ifxNS:addVerifyProcessRsInfo.ifxNS:TrnId = '1293882213';
+		    
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

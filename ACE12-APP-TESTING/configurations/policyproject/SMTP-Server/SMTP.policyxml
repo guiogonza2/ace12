@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policies>
+  <policy policyType="SMTP" policyName="SMTP" policyTemplate="SMTP">
+    <smtpServer>email-smtp.us-east-1.amazonaws.com:587</smtpServer>
+    <securityIdentity>SecuritySMTP</securityIdentity>
+  </policy>
+</policies>

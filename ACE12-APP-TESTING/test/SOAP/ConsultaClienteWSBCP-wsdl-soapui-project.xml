@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="4bf01abc-8039-4d02-a72a-b2dffb1378f3" activeEnvironment="Default" name="ConsultaClienteWSBCP?wsdl" resourceRoot="" soapui-version="5.8.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="e032ed70-7e78-4ab5-a2d2-351c3f5fb2f4" wsaVersion="NONE" name="ClienteWSDLSOAP" type="wsdl" bindingName="{http://bcp.com.pe/ClienteWSDL/}ClienteWSDLSOAP" soapVersion="1_1" anonymous="optional" definition="http://localhost:7801/ConsultaClienteWSBCP?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7801/ConsultaClienteWSBCP?wsdl"><con:part><con:url>http://localhost:7801/ConsultaClienteWSBCP?wsdl</con:url><con:content><![CDATA[<!--File ClienteWSDL.wsdl, application ConsultaClienteWS-->
+<wsdl:definitions name="ClienteWSDL" targetNamespace="http://bcp.com.pe/ClienteWSDL/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://bcp.com.pe/ClienteWSDL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="ClienteWSDL_InlineSchema1.xsd"/>
+        <binding hasEncoding="false" imported="true" name="ClienteWSDLSOAP" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://bcp.com.pe/ClienteWSDL/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+      <xsd:include schemaLocation="http://localhost:7801/ConsultaClienteWSBCP?xsd=xsd0"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="NewOperationRequest">
+    <wsdl:part element="tns:SolicitudClienteRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="NewOperationResponse">
+    <wsdl:part element="tns:SolicitudClienteResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="ClienteWSDL">
+    <wsdl:operation name="NewOperation">
+      <wsdl:input message="tns:NewOperationRequest"/>
+      <wsdl:output message="tns:NewOperationResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClienteWSDLSOAP" type="tns:ClienteWSDL">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="NewOperation">
+      <soap:operation soapAction="http://bcp.com.pe/ClienteWSDL/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClienteWSDL">
+    <wsdl:port binding="tns:ClienteWSDLSOAP" name="ClienteWSDLSOAP">
+      <soap:address location="http://localhost:7801/ConsultaClienteWSBCP"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:7801/ConsultaClienteWSBCP?xsd=xsd0</con:url><con:content><![CDATA[<!--File ClienteWSDL_InlineSchema1.xsd, application ConsultaClienteWS-->
+<xsd:schema targetNamespace="http://bcp.com.pe/ClienteWSDL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://bcp.com.pe/ClienteWSDL/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <xsd:element ibmSchExtn:docRoot="true" name="SolicitudClienteRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="idCliente" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="SolicitudClienteResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="idCliente" type="xsd:string"/>
+        <xsd:element name="nombreCliente" type="xsd:string"/>
+        <xsd:element name="apellidoCliente" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/ConsultaClienteWSBCP</con:endpoint></con:endpoints><con:operation id="4f60e977-469e-4d5d-8b67-273cc4626fd8" isOneWay="false" action="http://bcp.com.pe/ClienteWSDL/NewOperation" name="NewOperation" bindingOperationName="NewOperation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1b690db5-e72a-46a0-b6fb-a38a0af04441" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/ConsultaClienteWSBCP</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://bcp.com.pe/ClienteWSDL/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <cli:SolicitudClienteRequest>\r
+         <idCliente>123456789</idCliente>
+         <usuario>Brayan Sanabria</usuario>
+         <fecha>2025-03-25</fecha>
+      </cli:SolicitudClienteRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://bcp.com.pe/ClienteWSDL/NewOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="970a61bd-8d77-4f25-ba37-e85d181aaed4" name="TestSuite 1"><con:settings/><con:runType>PARALLELL</con:runType><con:testCase id="d05d493b-ce40-4a1d-b064-b2212f6ebd7c" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Exitoso" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="fc5c615c-5c0c-405a-9d8f-523f59435011"><con:settings/><con:config><script>// 📌 Pedir la ruta del archivo CSV al usuario
+def csvFilePath = System.console()?.readLine("Ingrese la ruta del archivo CSV: ")
+
+// 📌 Validar si el usuario ingresó la ruta
+if (!csvFilePath || csvFilePath.trim().isEmpty()) {
+    throw new IllegalArgumentException("⚠️ ERROR: No ingresó ninguna ruta.")
+}
+
+// 📌 Verificar si el archivo existe
+def file = new File(csvFilePath)
+if (!file.exists()) {
+    throw new FileNotFoundException("⚠️ ERROR: No se encontró el archivo CSV en la ruta: ${csvFilePath}")
+}
+
+// 📌 Leer el contenido del CSV
+def lines = file.readLines()
+if (lines.size() &lt; 2) {
+    throw new IllegalArgumentException("⚠️ ERROR: El archivo CSV está vacío o no tiene suficientes filas.")
+}
+
+// 📌 Obtener las columnas
+def headers = lines[0].split(";")
+def values = lines[1].split(";")
+def dataMap = [:]
+
+headers.eachWithIndex { header, index ->
+    dataMap[header.trim()] = values[index]?.trim()
+}
+
+// 📌 Asignar valores a propiedades en SoapUI
+context.testCase.setPropertyValue("idCliente", dataMap["idCliente"])
+context.testCase.setPropertyValue("usuario", dataMap["usuario"])
+context.testCase.setPropertyValue("fecha", dataMap["fecha"])
+context.testCase.setPropertyValue("endpoint", dataMap["endpoint"])
+context.testCase.setPropertyValue("statusEsperado", dataMap["statusEsperado"])
+
+// 📌 Mostrar datos cargados
+log.info("📌 Datos cargados: idCliente='${dataMap["idCliente"]}', usuario='${dataMap["usuario"]}', fecha='${dataMap["fecha"]}'")
+</script></con:config></con:testStep><con:testStep type="request" name="SOAP Request" id="54cceaa8-1bab-4c01-960a-26a21fd20de5"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClienteWSDLSOAP</con:interface><con:operation>NewOperation</con:operation><con:request name="SOAP Request" id="f11d8633-c8c8-40cf-be88-a7fc314adae8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestCase#endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://bcp.com.pe/ClienteWSDL/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cli:SolicitudClienteRequest>
+         <idCliente>${#TestCase#idCliente}</idCliente>
+         <usuario>${#TestCase#usuario}</usuario>
+         <fecha>${#TestCase#fecha}</fecha>
+      </cli:SolicitudClienteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+]]></con:request><con:assertion type="XPath Match" id="4ac931ad-b0d1-4d25-a743-eb0cc3855634" name="XPath Match"><con:configuration><path>//*[local-name()='SolicitudClienteResponse']/*[local-name()='Status']/*[local-name()='StatusCode']</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest id="ee907308-d46b-4164-92b6-aa7d288d795f" name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties><con:property><con:name>idCliente</con:name><con:value>123456789</con:value></con:property><con:property><con:name>nombreEsperado</con:name><con:value>CRISTHIAM</con:value></con:property><con:property><con:name>apellidoEsperado</con:name><con:value>SANABRIA</con:value></con:property><con:property><con:name>usuario</con:name><con:value>Juan Perez</con:value></con:property><con:property><con:name>fecha</con:name><con:value>2025-03-25</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>http://localhost:7800/ConsultaClienteWSBCP</con:value></con:property><con:property><con:name>statusEsperado</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase id="370d0979-fd3b-4633-b174-1c1f130bf019" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Errornegocio" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="934af855-1a97-4823-ae27-866d92010910"><con:settings/><con:config><script>// 📌 Pedir la ruta del archivo CSV al usuario
+def csvFilePath = System.console()?.readLine("Ingrese la ruta del archivo CSV: ")
+
+// 📌 Validar si el usuario ingresó la ruta
+if (!csvFilePath || csvFilePath.trim().isEmpty()) {
+    throw new IllegalArgumentException("⚠️ ERROR: No ingresó ninguna ruta.")
+}
+
+// 📌 Verificar si el archivo existe
+def file = new File(csvFilePath)
+if (!file.exists()) {
+    throw new FileNotFoundException("⚠️ ERROR: No se encontró el archivo CSV en la ruta: ${csvFilePath}")
+}
+
+// 📌 Leer el contenido del CSV
+def lines = file.readLines()
+if (lines.size() &lt; 2) {
+    throw new IllegalArgumentException("⚠️ ERROR: El archivo CSV está vacío o no tiene suficientes filas.")
+}
+
+// 📌 Obtener las columnas
+def headers = lines[0].split(";")
+def values = lines[1].split(";")
+def dataMap = [:]
+
+headers.eachWithIndex { header, index ->
+    dataMap[header.trim()] = values[index]?.trim()
+}
+
+// 📌 Asignar valores a propiedades en SoapUI
+context.testCase.setPropertyValue("idCliente", dataMap["idCliente"])
+context.testCase.setPropertyValue("usuario", dataMap["usuario"])
+context.testCase.setPropertyValue("fecha", dataMap["fecha"])
+context.testCase.setPropertyValue("endpoint", dataMap["endpoint"])
+context.testCase.setPropertyValue("statusEsperado", dataMap["statusEsperado"])
+
+// 📌 Mostrar datos cargados
+log.info("📌 Datos cargados: idCliente='${dataMap["idCliente"]}', usuario='${dataMap["usuario"]}', fecha='${dataMap["fecha"]}'")
+</script></con:config></con:testStep><con:testStep type="request" name="SOAP Request" id="1e46db25-2f40-4609-be30-0ba400501710"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ClienteWSDLSOAP</con:interface><con:operation>NewOperation</con:operation><con:request name="SOAP Request" id="f11d8633-c8c8-40cf-be88-a7fc314adae8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestCase#endpoint}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://bcp.com.pe/ClienteWSDL/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cli:SolicitudClienteRequest>
+         <idCliente>${#TestCase#idCliente}</idCliente>
+         <usuario>${#TestCase#usuario}</usuario>
+         <fecha>${#TestCase#fecha}</fecha>
+      </cli:SolicitudClienteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+]]></con:request><con:assertion type="XPath Match" id="4ac931ad-b0d1-4d25-a743-eb0cc3855634" name="XPath Match"><con:configuration><path>//*[local-name()='SolicitudClienteResponse']/*[local-name()='Status']/*[local-name()='StatusCode']</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest id="35f6ee37-4477-4781-ae29-eedf8cb04c4f" name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties><con:property><con:name>idCliente</con:name><con:value>123456789</con:value></con:property><con:property><con:name>nombreEsperado</con:name><con:value>CRISTHIAM</con:value></con:property><con:property><con:name>apellidoEsperado</con:name><con:value>SANABRIA</con:value></con:property><con:property><con:name>usuario</con:name><con:value>Juan Perez</con:value></con:property><con:property><con:name>fecha</con:name><con:value>2025-03-25</con:value></con:property><con:property><con:name>endpoint</con:name><con:value>http://localhost:7800/ConsultaClienteWSBCP</con:value></con:property><con:property><con:name>statusEsperado</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

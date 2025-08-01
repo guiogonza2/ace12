@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://grupoaval.com/inquiries/v1/" xmlns:Q1="urn://grupoaval.com/xsd/ifx/" xmlns:Q2="urn://grupoaval.com/xsd/ifx/v2/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:v1="urn://grupoaval.com/inquiries/v1/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <xsd:import namespace="urn://grupoaval.com/xsd/ifx/" schemaLocation="SrvOnlineVerifyProcess_InlineSchema2.xsd"/>			
+      <xsd:element name="addVerifyProcess">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+
+      <xsd:complexType name="addVerifyProcessResponse_Type">
+    	<xsd:sequence>
+    		<xsd:element ref="v1:addVerifyProcessRs"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+   
+      <xsd:complexType name="addVerifyProcessRq_Type">
+    	<xsd:sequence>
+    		<xsd:element minOccurs="1" ref="Q1:RqUID"/>
+    		<xsd:element minOccurs="0" ref="Q1:MsgRqHdr"/>
+    		<xsd:element minOccurs="0" ref="Q1:CustId"/>
+			<xsd:element minOccurs="0" ref="Q1:addVerifyProcessRqInfo"/>
+	 	</xsd:sequence>
+    </xsd:complexType>
+
+      <xsd:complexType name="addVerifyProcessRequest_Type">
+    	<xsd:sequence>
+    		<xsd:element ref="v1:addVerifyProcessRq"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+      <xsd:element name="addVerifyProcessRq" type="v1:addVerifyProcessRq_Type"/>
+      <xsd:element name="addVerifyProcessRs" type="v1:addVerifyProcessRs_Type"/>
+      <xsd:element ibmSchExtn:docRoot="true" name="addVerifyProcessResponse" type="v1:addVerifyProcessResponse_Type"/>
+      
+     
+  
+      <xsd:complexType name="addVerifyProcessRs_Type">
+    	<xsd:sequence>
+    		<xsd:element minOccurs="1" ref="Q1:Status"/>
+    		<xsd:element minOccurs="0" ref="Q1:ApprovalId"/>
+    		<xsd:element minOccurs="1" ref="Q1:RqUID"/>
+    		<xsd:element minOccurs="0" ref="Q1:MsgRqHdr"/>
+    		<xsd:element minOccurs="0" ref="Q1:MsgRsHdr"/>
+			<xsd:element minOccurs="0" ref="Q1:CustId"/>
+			<xsd:element minOccurs="0" ref="Q1:addVerifyProcessRsInfo"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+	
+      <xsd:element ibmSchExtn:docRoot="true" name="addVerifyProcessRequest" type="v1:addVerifyProcessRequest_Type"/>
+    </xsd:schema>

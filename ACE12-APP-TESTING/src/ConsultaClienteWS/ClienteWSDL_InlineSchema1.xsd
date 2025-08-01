@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+            targetNamespace="http://bcp.com.pe/ClienteWSDL/" 
+            xmlns:tns="http://bcp.com.pe/ClienteWSDL/">
+
+    <!-- SolicitudClienteRequest -->
+    <xsd:element name="SolicitudClienteRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- ID Cliente (Cédula) -->
+                <xsd:element name="idCliente">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:int">
+                            <xsd:minInclusive value="1"/>
+                            <xsd:maxInclusive value="999999999"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+                <!-- Usuario -->
+                <xsd:element name="usuario">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:minLength value="3"/>
+                            <xsd:maxLength value="50"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+                <!-- Fecha -->
+                <xsd:element name="fecha" type="xsd:date"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- SolicitudClienteResponse -->
+    <xsd:element name="SolicitudClienteResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="idCliente" type="xsd:int"/>
+                <xsd:element name="nombreCliente" type="xsd:string"/>
+                <xsd:element name="apellidoCliente" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

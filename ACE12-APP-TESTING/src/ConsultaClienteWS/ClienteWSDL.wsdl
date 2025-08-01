@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ClienteWSDL" targetNamespace="http://bcp.com.pe/ClienteWSDL/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://bcp.com.pe/ClienteWSDL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="ClienteWSDL_InlineSchema1.xsd"/>
+        <binding hasEncoding="false" imported="true" name="ClienteWSDLSOAP" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    
+          <xsd:schema targetNamespace="http://bcp.com.pe/ClienteWSDL/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+<xsd:include schemaLocation="ClienteWSDL_InlineSchema1.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+  <wsdl:message name="NewOperationRequest">
+    <wsdl:part element="tns:SolicitudClienteRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="NewOperationResponse">
+    <wsdl:part element="tns:SolicitudClienteResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="ClienteWSDL">
+    <wsdl:operation name="NewOperation">
+      <wsdl:input message="tns:NewOperationRequest"/>
+      <wsdl:output message="tns:NewOperationResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClienteWSDLSOAP" type="tns:ClienteWSDL">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="NewOperation">
+      <soap:operation soapAction="http://bcp.com.pe/ClienteWSDL/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClienteWSDL">
+    <wsdl:port binding="tns:ClienteWSDLSOAP" name="ClienteWSDLSOAP">
+      <soap:address location="http://bcp.com.pe"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

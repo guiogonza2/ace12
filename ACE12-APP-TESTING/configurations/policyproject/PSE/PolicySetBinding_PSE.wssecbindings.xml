@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?ibm-bip policySet="PolicyPSE"?>								 
+<securitybinding:securityBindings xmlns:securitybinding="http://www.ibm.com/xmlns/prod/websphere/200710/ws-securitybinding">
+  <securitybinding:securityBinding name="application">
+    <securitybinding:securityOutboundBindingConfig>
+      <securitybinding:signingInfo name="gen_app_signparts_request" order="1">
+        <securitybinding:signingKeyInfo reference="gen_InitToken_signapp_signparts_request_keyinfo"/>
+        <securitybinding:signingPartReference reference="request:app_signparts_request">
+          <securitybinding:transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </securitybinding:signingPartReference>
+      </securitybinding:signingInfo>
+      <securitybinding:keyInfo classname="com.ibm.ws.wssecurity.wssapi.CommonContentGenerator" name="gen_InitToken_signapp_signparts_request_keyinfo" type="STRREF">
+        <securitybinding:tokenReference reference="gen_requestapp_signparts_request"/>
+      </securitybinding:keyInfo>
+      <securitybinding:tokenGenerator classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenGenerator" name="gen_requestapp_signparts_request">
+        <securitybinding:valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/>
+        <securitybinding:jAASConfig configName="system.wss.generate.x509"/>
+        <securitybinding:callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509GenerateCallbackHandler">
+          <securitybinding:keyStore path="*MQSIBROKERSTOREPATHMQSI*" storepass="*MQSIBROKERSTOREPWDMQSI*" type="JKS"/>
+          <securitybinding:key alias="pse" keypass="*MQSIBROKERSTOREKEYPASSpseMQSI*" name="CN=BANCO FINANDINA S.A. BIC,C=CO,GIVENNAME=BEATRIZ,L=CHIA,O=BANCO FINANDINA S.A. BIC,OID.1.3.6.1.4.1.23267.2.2=43045830,OID.1.3.6.1.4.1.23267.2.3=8600518946,SERIALNUMBER=1706182,OU=PSE,ST=CUNDINAMARCA,STREET=KM 17 CARR CENTRAL DEL NORTE VDA FUSCA,SURNAME=CANO RODRIGUEZ"/>
+        </securitybinding:callbackHandler>
+      </securitybinding:tokenGenerator>
+      <securitybinding:timestampExpires expires="2"/>
+    </securitybinding:securityOutboundBindingConfig>
+    <securitybinding:securityInboundBindingConfig>
+      <securitybinding:signingInfo name="con_app_signparts_response">
+        <securitybinding:signingKeyInfo reference="con_RecipToken_signapp_signparts_response_keyinfo"/>
+        <securitybinding:signingPartReference reference="response:app_signparts_response">
+          <securitybinding:transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </securitybinding:signingPartReference>
+      </securitybinding:signingInfo>
+      <securitybinding:keyInfo classname="com.ibm.ws.wssecurity.wssapi.CommonContentConsumer" name="con_RecipToken_signapp_signparts_response_keyinfo">
+        <securitybinding:tokenReference reference="con_responseapp_signparts_response"/>
+      </securitybinding:keyInfo>
+      <securitybinding:tokenConsumer classname="com.ibm.ws.wssecurity.wssapi.token.impl.CommonTokenConsumer" name="con_responseapp_signparts_response">
+        <securitybinding:valueType localName="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/>
+        <securitybinding:jAASConfig configName="system.wss.consume.x509"/>
+        <securitybinding:callbackHandler classname="com.ibm.websphere.wssecurity.callbackhandler.X509ConsumeCallbackHandler">
+          <securitybinding:keyStore path="*MQSITRUSTSTOREPATHMQSI*" storepass="*MQSITRUSTSTOREPWDMQSI*" type="JKS"/>
+          <securitybinding:key alias="achpse" name="CN=ACH COLOMBIA S A,C=CO,GIVENNAME=GUSTAVO,L=BOGOTA D.C.,O=ACH COLOMBIA S A,1.3.6.1.4.1.23267.2.2=19447404,1.3.6.1.4.1.23267.2.3=8300785126,SERIALNUMBER=1786627,OU=PSE DESARROLLO,ST=BOGOTA D.C.,STREET=TV 23 97 73 P 3,SURNAME=VEGA VILLAMIL"/>
+          <securitybinding:certPathSettings>
+            <securitybinding:trustAnyCertificate/>
+          </securitybinding:certPathSettings>
+        </securitybinding:callbackHandler>
+      </securitybinding:tokenConsumer>
+    </securitybinding:securityInboundBindingConfig>
+  </securitybinding:securityBinding>
+</securitybinding:securityBindings>

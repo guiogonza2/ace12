@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://grupoaval.com/inquiries/v1/" xmlns:ns1="urn://grupoaval.com/xsd/ifx/" xmlns:ns2="urn://grupoaval.com/xsd/ifx/v2/" xmlns:v1="urn://grupoaval.com/inquiries/v1/">
+  <xsd:import namespace="urn://grupoaval.com/xsd/ifx/v2/" schemaLocation="SrvOnlineVerifyProcess_InlineSchema3.xsd"/>
+  <xsd:import namespace="urn://grupoaval.com/xsd/ifx/" schemaLocation="SrvOnlineVerifyProcess_InlineSchema2.xsd"/>
+  <xsd:include schemaLocation="SrvOnlineVerifyProcess_InlineSchema1.xsd"/>
+
+<!-- BEGIN Global group petaining to all wsdl:message definitions -->
+<!-- END Global group -->
+
+
+<!-- BEGIN Message Definitions for the wsdl:operations  -->
+<!-- END Message Definitions -->
+
+
+</xsd:schema>

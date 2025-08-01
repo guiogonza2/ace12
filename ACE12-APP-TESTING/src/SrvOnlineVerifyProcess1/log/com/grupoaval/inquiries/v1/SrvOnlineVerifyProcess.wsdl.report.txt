@@ -1,0 +1,24 @@
+
+
+Importing file: C:\Users\PC\Downloads\SrvOnlineVerifyProcess1\WSDL\SrvOnlineVerifyProcess.wsdl
+
+The WSDL import will proceed with bindings SrvAddVerifyProcessSOAP.
+Creating wsdl schema document for file:///C:/Users/PC/Downloads/SrvOnlineVerifyProcess1/WSDL/SrvOnlineVerifyProcess.wsdl.
+Parsing wsdl binding {urn://grupoaval.com/inquiries/v1/}SrvAddVerifyProcessSOAP.
+Parsing wsdl binding input addVerifyProcess.
+Parsing wsdl binding output addVerifyProcess.
+Processing doc style for operation addVerifyProcess.
+Populating WSDL schema SrvOnlineVerifyProcess.xsd.
+Creating file SrvOnlineVerifyProcess.xsd in the workspace.
+Creating file SrvOnlineVerifyProcess_InlineSchema1.xsd in the workspace.
+Creating file /SrvOnlineVerifyProcess1/SrvOnlineVerifyProcess_InlineSchema2.xsd in the workspace.
+Creating file /SrvOnlineVerifyProcess1/SrvOnlineVerifyProcess_InlineSchema3.xsd in the workspace.
+Copying source WSDL SrvOnlineVerifyProcess.wsdl to SrvOnlineVerifyProcess.wsdl.
+
+Elapsed time processing this message definition file: 0.361 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+
