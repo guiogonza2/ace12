@@ -2,69 +2,74 @@
 
 ## Propósito y Objetivo
 
-El módulo `srvonlineverifyprocess_Compute.esql` está diseñado para procesar y modificar mensajes SOAP en el contexto de un servicio de verificación en línea. Su objetivo principal es ajustar el cuerpo de la respuesta SOAP basándose en la solicitud recibida, estableciendo un estado de respuesta exitoso y añadiendo información específica relacionada con el proceso de verificación.
+El propósito de este módulo ESQL (`srvonlineverifyprocess_Compute.esql`) es procesar y modificar mensajes SOAP para el servicio de verificación en línea, específicamente para responder a solicitudes de verificación. El objetivo principal es ajustar la respuesta del servicio para indicar el éxito de la operación, copiar ciertos datos de la solicitud a la respuesta, y añadir información específica relacionada con el proceso de verificación.
 
 ## Explicación del Código
 
-El módulo contiene una serie de declaraciones y funciones diseñadas para manipular mensajes SOAP. A continuación, se detalla el propósito y funcionamiento de cada componente del código:
+El módulo define un conjunto de operaciones para manipular mensajes SOAP, incluyendo la copia de encabezados y la modificación del cuerpo del mensaje. A continuación, se detalla el flujo y las operaciones realizadas:
 
 ### Declaraciones de Espacios de Nombres
 
-El módulo comienza con la declaración de varios espacios de nombres (namespaces) utilizados en los mensajes SOAP:
+- `soapNS`: Espacio de nombres para los elementos SOAP estándar.
+- `v1NS`: Espacio de nombres definido por `grupoaval.com` para la versión 1 de sus servicios.
+- `ifxNS`: Espacio de nombres para elementos IFX, un estándar en servicios financieros.
+- `v2NS`: Espacio de nombres para la versión 2 de los elementos IFX.
 
-- `soapNS`: Espacio de nombres para los elementos estándar de SOAP.
-- `v1NS`: Espacio de nombres definido por `grupoaval.com` para la versión 1 de sus servicios de consulta.
-- `ifxNS`: Espacio de nombres para elementos definidos por `grupoaval.com` relacionados con el formato IFX.
-- `v2NS`: Espacio de nombres para la versión 2 de los elementos IFX definidos por `grupoaval.com`.
+```esql
+DECLARE soapNS NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+DECLARE v1NS NAMESPACE 'urn://grupoaval.com/inquiries/v1/';
+DECLARE ifxNS NAMESPACE 'urn://grupoaval.com/xsd/ifx/';
+DECLARE v2NS NAMESPACE 'urn://grupoaval.com/xsd/ifx/v2/';
+```
 
 ### Función Principal `Main`
 
 La función `Main` realiza las siguientes operaciones:
 
-1. **Copia de Encabezados**: Copia todos los encabezados de la solicitud SOAP a la respuesta, manteniendo intacta la estructura del mensaje.
-   
-2. **Modificación del Cuerpo de la Respuesta**: Ajusta el cuerpo de la respuesta SOAP para indicar un proceso de verificación exitoso mediante la modificación de los siguientes elementos:
-   - `StatusCode`: Establece el código de estado a '0', indicando éxito.
-   - `Severity`: Establece la severidad a 'Info', indicando que la respuesta es informativa.
-   - `StatusDesc`: Proporciona una descripción textual del estado, en este caso, 'Transacción Exitosa'.
+1. **Copia de Encabezados de la Solicitud a la Respuesta**: Inicialmente, copia todo el mensaje de entrada (`InputRoot`) al mensaje de salida (`OutputRoot`), incluyendo encabezados y cuerpo.
 
-3. **Datos Adicionales**: Copia el `RqUID` (Identificador Único de la Solicitud) de la solicitud a la respuesta para correlacionar ambos mensajes.
+2. **Modificación del Cuerpo de la Respuesta**: Ajusta el estado de la respuesta (`StatusCode`, `Severity`, `StatusDesc`) para indicar que la transacción fue exitosa.
 
-4. **Datos Específicos de la Respuesta**: Añade información específica de la respuesta, como un `RefId` (Identificador de Referencia) y un `TrnId` (Identificador de Transacción), con valores fijos.
+3. **Copia de Datos de la Solicitud a la Respuesta**: Copia el `RqUID` (Identificador Único de la Solicitud) de la solicitud original a la respuesta.
+
+4. **Añadir Información Específica de la Respuesta**: Incluye un `RefId` (Identificador de Referencia) y un `TrnId` (Identificador de Transacción) específicos para la operación de verificación.
+
+```esql
+SET OutputRoot = InputRoot;
+SET OutputRoot.XMLNSC.soapNS:Envelope.soapNS:Body... = '0'; -- y otras líneas similares para modificar el cuerpo.
+SET OutputRoot.XMLNSC...RqUID = InputRoot.XMLNSC...RqUID;
+SET OutputRoot.XMLNSC...RefId = '933A0D8K7G002011'; -- y otra línea para TrnId.
+RETURN TRUE;
+```
 
 ### Procedimientos Auxiliares
 
-El módulo también incluye dos procedimientos adicionales:
-
-- `CopyMessageHeaders`: Copia los encabezados del mensaje de la solicitud a la respuesta.
-- `CopyEntireMessage`: Copia el mensaje completo de la solicitud a la respuesta.
+- `CopyMessageHeaders()`: Copia los encabezados del mensaje de entrada al mensaje de salida.
+- `CopyEntireMessage()`: Copia el mensaje completo de entrada al mensaje de salida.
 
 ## Campos/Índices Utilizados
 
-El código manipula principalmente los siguientes campos dentro de los mensajes SOAP:
-
-- `StatusCode`
-- `Severity`
-- `StatusDesc`
-- `RqUID`
-- `RefId`
-- `TrnId`
+- **Campos SOAP**: Utiliza campos estándar de SOAP como `Envelope`, `Body`, etc.
+- **Campos Específicos**: `StatusCode`, `Severity`, `StatusDesc`, `RqUID`, `RefId`, `TrnId`.
 
 ## Filtros y Transformaciones Aplicadas
 
-Las transformaciones aplicadas se centran en modificar el cuerpo de la respuesta SOAP para reflejar un estado de éxito y añadir información específica del proceso de verificación.
+- Filtro por tipo de mensaje (solicitud/respueta).
+- Transformación de datos específicos de la respuesta.
+- Copia y asignación de valores específicos entre la solicitud y la respuesta.
 
 ## Resultado Esperado
 
-El resultado esperado es un mensaje SOAP de respuesta modificado que indica un proceso de verificación exitoso, con información específica incluida en el cuerpo del mensaje.
+El resultado esperado es un mensaje SOAP modificado que indica el éxito de la operación de verificación, con información específica de la transacción incluida en el cuerpo del mensaje.
 
 ## Casos de Uso
 
-Este módulo es útil en escenarios donde se requiere procesar y responder a solicitudes de verificación en línea, especialmente en servicios web que utilizan el protocolo SOAP para la comunicación.
+Este módulo es útil en escenarios donde es necesario procesar respuestas de servicios de verificación en línea, ajustando el mensaje de respuesta para reflejar el éxito de la operación y proporcionar información detallada de la transacción.
 
 ## Notas Técnicas Importantes
 
-- Es crucial mantener la consistencia en los espacios de nombres utilizados en los mensajes SOAP para evitar errores de procesamiento.
-- La asignación de valores fijos a `RefId` y `TrnId` en este ejemplo es ilustrativa; en un entorno de producción, estos valores podrían derivarse de la lógica de negocio o la solicitud entrante.
+- Este módulo es específico para mensajes SOAP y utiliza espacios de nombres definidos para su manipulación.
+- La correcta declaración y uso de los espacios de nombres (`NAMESPACE`) es crucial para la manipulación exitosa de los elementos XML.
+- La función `Main` retorna `TRUE` siempre, indicando que el procesamiento se completó sin errores detectados.
 
-Este módulo demuestra un enfoque para manipular y responder a mensajes SOAP dentro de un entorno de servicios web, proporcionando un marco para ajustes específicos de respuesta en procesos de verificación en línea.
+Este documento proporciona una visión general del propósito, la estructura y la funcionalidad del módulo `srvonlineverifyprocess_Compute.esql`, diseñado para la manipulación de mensajes SOAP en el contexto de servicios de verificación en línea.
