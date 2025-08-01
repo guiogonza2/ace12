@@ -2,6 +2,10 @@ import os
 import sys
 from openai import OpenAI
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde .env
+load_dotenv()
 
 def inicializar_cliente():
     """Configura el cliente de OpenAI con la clave API"""
