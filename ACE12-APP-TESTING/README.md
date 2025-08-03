@@ -1,42 +1,44 @@
 # 📖 ACE12 - Repositorio ESQL
 
 ## 📋 Descripción General
-Este repositorio contiene archivos ESQL destinados a integraciones utilizando IBM Integration Bus (IIB). El objetivo principal de este repositorio es proporcionar soluciones en el ámbito de los servicios web, validaciones y consultas de datos. Los componentes dentro de este repositorio están diseñados para facilitar la interoperabilidad de sistemas mediante la creación de flujos de integración reutilizables y eficientes.
+Este repositorio contiene archivos ESQL diseñados para integraciones dentro de IBM App Connect Enterprise (ACE). Los proyectos presentes están orientados a la consulta de datos y procesos de verificación en línea, utilizando características avanzadas de ESQL para transformar y gestionar la información de manera eficiente.
 
 ## 📊 Resumen Ejecutivo
 
-| 📈 Métrica                        | 📋 Valor                 |
-|-----------------------------------|--------------------------|
-| **📄 Total de archivos ESQL**     | 2                        |
-| **📁 Proyectos encontrados**      | 1                        |
-| **💾 Tamaño total**               | 5 KB                     |
-| **🌿 Rama principal**              | `main`                   |
-| **🔄 Última actualización**       | 3 de agosto de 2025      |
+| 📈 Métrica                        | 📋 Valor                |
+|-----------------------------------|-----------------------|
+| **📄 Total de archivos ESQL**     | 2                     |
+| **📁 Proyectos encontrados**       | 1                     |
+| **💾 Tamaño total**               | 5 KB                  |
+| **🌿 Rama principal**              | `main`                |
+| **🔄 Última actualización**        | 3 de agosto de 2025   |
 
 ## 🗂️ Estructura por Proyectos
 
 ### ACE12-APP-TESTING
-Este proyecto está diseñado para probar funciones relacionadas con la consulta de clientes y validaciones de procesos en línea. Los archivos contenidos proporcionan lógica de computación necesaria para esos servicios.
+Este proyecto tiene como objetivo principal garantizar la funcionalidad de servicios que consultan datos de clientes y verifican procesos en línea. Los archivos ESQL dentro de este proyecto están diseñados para realizar operaciones de cálculo y transformación de datos.
 
-| Archivo                                                            | Tamaño   | Descripción                                                      |
-|-------------------------------------------------------------------|----------|------------------------------------------------------------------|
-| [ConsultaCliente_Compute.esql](src/ConsultaClienteWS/ConsultaCliente_Compute.esql) | 3.1 KB   | Computación para consultar la información del cliente.           |
-| [srvonlineverifyprocess_Compute.esql](src/SrvOnlineVerifyProcess1/srvonlineverifyprocess_Compute.esql) | 1.9 KB   | Procesamiento de la verificación de procesos en línea.           |
+| 📄 Archivo                                       | Tamaño  | Descripción                                      |
+|-------------------------------------------------|---------|--------------------------------------------------|
+| [ConsultaCliente_Compute.esql](src/ConsultaClienteWS/ConsultaCliente_Compute.esql) | 3.1 KB  | Lógica para consultar información del cliente.   |
+| [srvonlineverifyprocess_Compute.esql](src/SrvOnlineVerifyProcess1/srvonlineverifyprocess_Compute.esql) | 1.9 KB  | Proceso de verificación en línea de solicitudes. |
 
-- **Documentación del Proyecto**: [ACE12-APP-TESTING Docs](./ACE12-APP-TESTING/docs)
+#### Documentación
+- [ConsultaCliente_Compute.esql](src/ConsultaClienteWS/documentation.md)
+- [srvonlineverifyprocess_Compute.esql](src/SrvOnlineVerifyProcess1/documentation.md)
 
 ## 🏗️ Arquitectura General
 
 ### Patrones de Integración
-Los proyectos y archivos contienen patrones comunes que engloban:
-- **Web Services (WS)**: Integración con servicios externos para la consulta de datos de clientes y verificación de procesos.
-- **Transformaciones de datos**: Los archivos ESQL son utilizados para mapear y transformar datos entre diferentes formatos requeridos por las fuentes o destinos de integración.
-- **Servicios de consulta**: Se proporcionan servicios para consultar información relevante desde sistemas externos, particularmente en el archivo de consulta de clientes.
+Los patrones de integración observados en los archivos ESQL incluyen:
+- **Web Services (WS)**: Integración con servicios de consulta de datos de clientes.
+- **Transformaciones de datos**: Manipulación y procesamiento de datos en formato ESQL.
+- **Servicios de consulta**: Archivos enfocados en la obtención de información específica desde fuentes de datos confiables.
 
 ### Convenciones de Nomenclatura
-Los nombres de archivo siguen un patrón de nomenclatura que refleja sus responsabilidades:
-- `ConsultaCliente_Compute`: Indica que el archivo se encarga de computar o procesar datos relacionados con clientes.
-- `srvonlineverifyprocess_Compute`: Sugiere que el archivo está diseñado para manejar la verificación de un proceso en línea.
+Los nombres de archivo emplean una estructura clara que refleja su funcionalidad y propósito:
+- `ConsultaCliente_Compute.esql`: Indicando que se trata de un archivo de cómputo relacionado con la consulta de un cliente.
+- `srvonlineverifyprocess_Compute.esql`: Destacando su enfoque en el proceso de verificación en línea, también como un archivo de cómputo.
 
 ## 📁 Índice de Archivos
 
@@ -46,38 +48,42 @@ Los nombres de archivo siguen un patrón de nomenclatura que refleja sus respons
   - [srvonlineverifyprocess_Compute.esql](ACE12-APP-TESTING/src/SrvOnlineVerifyProcess1/srvonlineverifyprocess_Compute.esql)
 
 ### Índice Alfabético
-| Nombre del archivo                                                  | Proyecto                       | Enlace al código fuente                                                                     | Enlace a documentación            |
-|-------------------------------------------------------------------|--------------------------------|--------------------------------------------------------------------------------------------|-----------------------------------|
-| ConsultaCliente_Compute.esql                                       | ACE12-APP-TESTING             | [ConsultaCliente_Compute.esql](ACE12-APP-TESTING/src/ConsultaClienteWS/ConsultaCliente_Compute.esql) | [Documentación](./ACE12-APP-TESTING/docs/ConsultaCliente_Compute.md) |
-| srvonlineverifyprocess_Compute.esql                                | ACE12-APP-TESTING             | [srvonlineverifyprocess_Compute.esql](ACE12-APP-TESTING/src/SrvOnlineVerifyProcess1/srvonlineverifyprocess_Compute.esql) | [Documentación](./ACE12-APP-TESTING/docs/srvonlineverifyprocess_Compute.md) |
+| Nombre del archivo                               | Proyecto                      | Enlace al código fuente                                                                | Documentación                          |
+|--------------------------------------------------|-------------------------------|--------------------------------------------------------------------------------------|----------------------------------------|
+| ConsultaCliente_Compute.esql                     | ACE12-APP-TESTING            | [ConsultaCliente_Compute.esql](ACE12-APP-TESTING/src/ConsultaClienteWS/ConsultaCliente_Compute.esql) | [Documentación](src/ConsultaClienteWS/documentation.md) |
+| srvonlineverifyprocess_Compute.esql              | ACE12-APP-TESTING            | [srvonlineverifyprocess_Compute.esql](ACE12-APP-TESTING/src/SrvOnlineVerifyProcess1/srvonlineverifyprocess_Compute.esql) | [Documentación](src/SrvOnlineVerifyProcess1/documentation.md) |
 
 ## 🚀 Guía de Uso
 
 ### Prerequisitos
-- IBM Integration Bus (IIB) v10 o superior
-- Conocimientos básicos en ESQL y flujos de integración.
-- Acceso a un entorno donde se puedan ejecutar flujos de IIB.
+- IBM Integration Bus (IIB) v10 o superior.
+- Acceso a un ambiente de desarrollo y pruebas configurado para ACE.
 
 ### Estructura de Directorios
-El proyecto sigue una estructura organizada donde:
-- `src/`: Contiene los archivos ESQL y la lógica de computación.
-- `docs/`: Incluye la documentación detallada para cada archivo y proyecto.
+La estructura de directorios se organiza de la siguiente manera:
+```
+ACE12-APP-TESTING/
+├── src/
+│   ├── ConsultaClienteWS/
+│   │   ├── ConsultaCliente_Compute.esql
+│   │   └── documentation.md
+│   └── SrvOnlineVerifyProcess1/
+│       ├── srvonlineverifyprocess_Compute.esql
+│       └── documentation.md
+```
 
 ### Convenciones de Documentación
-- Cada archivo ESQL cuenta con su documentación particular en `docs`.
-- Los README de proyecto se encuentran en las carpetas principales para una fácil localización.
+- Cada archivo ESQL tiene su documentación dedicada en un archivo `documentation.md` correspondiente.
+- Los README de los proyectos están ubicados en cada carpeta principal.
 
 ## 🔧 Desarrollo y Mantenimiento
 
 ### Flujo de Trabajo
-1. Crear una rama para cada nueva funcionalidad o corrección de errores.
-2. Realizar modificaciones y pruebas unitarias.
-3. Hacer un Pull Request hacia la rama `main` para revisión.
-4. Asegurar la correcta documentación de cada cambio.
+El flujo de trabajo se centra en un enfoque basado en colaboraciones, donde se realizan revisiones de código y despliegues a entornos de prueba antes de llevar a producción.
 
 ### Generación de Documentación
 - Este README se genera automáticamente.
-- La documentación individual se actualiza con cada push a la rama principal.
+- La documentación por archivo se actualiza con cada push.
 - Webhook de generación: `POST /generate-readme`.
 
 ## 📚 Enlaces Útiles
@@ -89,18 +95,18 @@ El proyecto sigue una estructura organizada donde:
 ## 📈 Estadísticas Detalladas
 
 ### Top 10 Archivos Más Grandes
-| Archivo                          | Tamaño   |
-|----------------------------------|----------|
-| ConsultaCliente_Compute.esql     | 3.1 KB   |
-| srvonlineverifyprocess_Compute.esql| 1.9 KB   |
+| Archivo                                      | Tamaño |
+|----------------------------------------------|--------|
+| ConsultaCliente_Compute.esql                 | 3.1 KB |
+| srvonlineverifyprocess_Compute.esql          | 1.9 KB |
 
 ### Distribución por Tipo
-- **Aplicaciones**: 2 archivos de tipo ESQL, todos correspondientes a procesos de computación.
+- Archivos ESQL: 2
 
 ---
 
 ## 🔄 Información de Generación
-- **Generado**: 3 de agosto de 2025 a las 21:48:41
+- **Generado**: 3 de agosto de 2025 a las 22:06:25
 - **Repositorio**: [guiogonza2/ace12](https://github.com/guiogonza2/ace12)
 - **Herramienta**: Sistema automático de documentación ESQL
 - **Versión**: 2.0
