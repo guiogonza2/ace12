@@ -64,4 +64,3 @@ CREATE COMPUTE MODULE ConsultaCliente_Compute
 	END;
 END MODULE;
 
-schemas
