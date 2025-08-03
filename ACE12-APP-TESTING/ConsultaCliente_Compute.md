@@ -2,7 +2,7 @@
 # ConsultaCliente_Compute - Documentación Técnica
 
 ## 📋 Información General
-- **Módulo**: ConsultaCliente_Compute
+- **Módulo**: ConsultaCliente_Computeasasas
 - **Archivo**: `ConsultaCliente_Compute.esql`
 - **Proyecto**: `ACE12-APP-TESTING`
 - **Repositorio**: [guiogonza2/ace12](https://github.com/guiogonza2/ace12)
